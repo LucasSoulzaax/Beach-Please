@@ -1306,3 +1306,112 @@ body.menu-aberto::before {
 .badge-sacola-footer.animando {
   animation: badgePopFooter 0.3s ease;
 }
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  max-width: 100vw;
+}
+
+
+main,
+section,
+header,
+footer {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+
+@media (max-width: 768px) {
+  .carousel-container {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel-slide {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+ 
+  .cardsVendidos,
+  .cardsPromocoes,
+  .cardsLancamentos {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  
+  .cardsCriados {
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+ 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  
+  #cabecalho {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  
+  .imagenzz {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+ 
+  .carousel-container {
+    touch-action: pan-x pan-y;
+  }
+}
+
+
+.categorias-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100vw;
+}
+
+
+#rodape {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+#rodape #icons {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
