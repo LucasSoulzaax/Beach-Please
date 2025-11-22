@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beach Please - Produtos</title>
+  <link rel="stylesheet" href="../Css/reset.css">
+  <link rel="stylesheet" href="../Css/carrossel.css">
+  <link rel="stylesheet" href="../Css/cssMenu.css">
+  <link rel="stylesheet" href="../Css/style.css">
+  <link rel="stylesheet" href="../Css/cssModal.css">
+  <link rel="stylesheet" href="../Css/modalzin.css">
+</head>
+
+<body>
+  <header id="cabecalho">
+    <nav id="navegation">
+      <div class="imagenzz">
+        <img src="../Assets/Sources/Justify--Streamline-Atlas.png" alt="Menu" id="openMenu" class="menuzin2 menuAbrir">
+
+        <div class="lupita desktop-search">
+          <input class="buscarItem" id="buscarItem" type="text" placeholder="O que você está buscando?">
+          <img class="lupinha" src="../Assets/Sources/Magnifying-Glass--Streamline-Atlas.png" alt="Buscar">
+          <div id="testando"></div>
+        </div>
+
+        <a href="../index.html" class="logo">
+          <img src="../Assets/Sources/Beach.png" alt="Beach Please Logo">
+        </a>
+
+        <img class="lupinha-mobile" src="../Assets/Sources/Magnifying-Glass--Streamline-Atlas.png" alt="Buscar">
+
+        <div class="sacola-wrapper">
+          <img class="sacola" src="../Assets/Sources/Shop-Bag--Streamline-Atlas.png" alt="Sacola">
+          <span id="badgeSacolaMobile" class="badge-sacola-mobile">0</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div id="modalBuscaMobile" class="modal-busca-mobile">
+    <div class="modal-busca-content">
+      <div class="modal-busca-header">
+        <input type="text" id="buscarItemMobile" placeholder="O que você está buscando?">
+        <button class="btn-fechar-busca">✕</button>
+      </div>
+      <div id="resultadosBuscaMobile"></div>
+    </div>
+  </div>
+
+  <main>
+    <section class="categorias-container">
+      <div class="categorias-scroll" id="categoriasScroll">
+        <div class="categoria-item ativo" onclick="filtrarPorTipo('todos')">
+          <div class="categoria-circulo">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&q=80" alt="Todos">
+          </div>
+          <span class="categoria-nome">Todos</span>
+        </div>
+
+        <div class="categoria-item" onclick="filtrarPorTipo('vestido')">
+          <div class="categoria-circulo">
+            <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=200&q=80" alt="Vestidos">
+          </div>
+          <span class="categoria-nome">Vestidos</span>
+        </div>
+
+        <div class="categoria-item" onclick="filtrarPorTipo('calca')">
+          <div class="categoria-circulo">
+            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&q=80" alt="Calças">
+          </div>
+          <span class="categoria-nome">Calças</span>
+        </div>
+
+        <div class="categoria-item" onclick="filtrarPorTipo('blusa')">
+          <div class="categoria-circulo">
+            <img src="https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?w=200&q=80" alt="Blusas">
+          </div>
+          <span class="categoria-nome">Blusas</span>
+        </div>
+
+        <div class="categoria-item" onclick="filtrarPorTipo('lingerie')">
+          <div class="categoria-circulo">
+            <img src="https://images.unsplash.com/photo-1651671685354-8ef9110ea28e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lingerie">
+          </div>
+          <span class="categoria-nome">Lingerie</span>
+        </div>
+
+        <div class="categoria-item" onclick="filtrarPorTipo('biquini')">
+          <div class="categoria-circulo">
+            <img src="https://images.unsplash.com/flagged/photo-1553928841-ccac95ad7e72?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Biquínis">
+          </div>
+          <span class="categoria-nome">Biquínis</span>
+        </div>
+      </div>
+    </section>
+    
+    <section id="colection">
+      <h2>Mais vendidos</h2>
+      <div class="cardsVendidos"></div>
+    </section>
+
+    <section id="colection">
+      <h2>PROMOÇÕES</h2>
+      <div class="cardsPromocoes"></div>
+    </section>
+
+    <section id="colection">
+      <h2>LANÇAMENTOS</h2>
+      <div class="cardsLancamentos"></div>
+    </section>
+  </main>
+
+  <div class="menu-panel" id="menuPanel">
+    <div class="menu-header">
+      <img src="../Assets/Sources/Beach.png" alt="Beach Please" class="menu-logo">
+      <button class="close-menu" id="closeMenu"></button>
+    </div>
+
+    <nav class="menu-content">
+      <a href="../index.html" class="menu-item">
+        <span>Home</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="../Pages/produtos.html" class="menu-item">
+        <span>Produtos</span>
+        <svg class="setinha produto_seta" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#horarios" class="menu-item">
+        <span>Horários de Atendimento</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#retiradas" class="menu-item">
+        <span>Retiradas</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#perguntas" class="menu-item">
+        <span>Perguntas Frequentes</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#contato" class="menu-item">
+        <span>Contato</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </nav>
+  </div>
+
+  <div id="footer">
+    <h2>Desenvolvido por Matheus e Lucas.</h2>
+    <h2>Designed by Nayra Conrado.</h2>
+    <p>&copy;Todos os direitos reservados.</p>
+  </div>
+
+<footer id="rodape">
+  <section class="menuzin">
+    <div id="icons">
+      <img src="./Assets/Sources/icons8-home-500.png" alt="Home" class="home-icon">
+      <img src="./Assets/Sources/hamburger.png" alt="Menu" class="menuAbrir">
+      <img src="./Assets/Sources/loupe.png" alt="Buscar" class="lupinha-rodape">
+      <div class="sacola-footer-wrapper">
+        <img src="./Assets/Sources/shopping-bag.png" alt="Sacola" class="sacola-rodape">
+        <span id="badgeSacolaFooter" class="badge-sacola-footer">0</span>
+      </div>
+    </div>
+  </section>
+</footer>
+
+  <script type="module" src="../JS/carrosselScript.js"></script>
+  <script type="module" src="../JS/script.js"></script>
+  <script src="../JS/auth.js"></script>
+</body>
+
+</html>

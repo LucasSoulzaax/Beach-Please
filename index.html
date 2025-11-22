@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beach Please - Roupas</title>
+  <link rel="stylesheet" href="./Css/reset.css">
+  <link rel="stylesheet" href="./Css/carrossel.css">
+  <link rel="stylesheet" href="./Css/cssMenu.css">
+  <link rel="stylesheet" href="./Css/style.css">
+  <link rel="stylesheet" href="./Css/cssModal.css">
+  <link rel="stylesheet" href="./Css/modalzin.css">
+</head>
+
+<body>
+  <div id="splashScreen" class="splash-screen">
+    <div class="splash-content">
+      <img src="./Assets/Sources/Beach.png" alt="Beach Please" class="splash-logo">
+      <div class="splash-loader">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+  </div>
+  
+  <header id="cabecalho">
+    <nav id="navegation">
+      <div class="imagenzz">
+        <!-- Mobile: Hamburger -->
+        <img src="./Assets/Sources/Justify--Streamline-Atlas.png" alt="Menu" id="openMenu" class="menuzin2 menuAbrir">
+
+        <!-- Desktop: Input + Lupa -->
+        <div class="lupita desktop-search">
+          <input class="buscarItem" id="buscarItem" type="text" placeholder="O que você está buscando?">
+          <img class="lupinha" src="./Assets/Sources/Magnifying-Glass--Streamline-Atlas.png" alt="Buscar">
+          <div id="testando"></div>
+        </div>
+
+        <!-- Logo -->
+        <a href="#cabecalho" class="logo">
+          <img src="./Assets/Sources/Beach.png" alt="Beach Please Logo">
+        </a>
+
+        <!-- Mobile: Lupa -->
+        <img class="lupinha-mobile" src="./Assets/Sources/Magnifying-Glass--Streamline-Atlas.png" alt="Buscar">
+
+        <!-- Sacola -->
+        <div class="sacola-wrapper">
+          <img class="sacola" src="./Assets/Sources/Shop-Bag--Streamline-Atlas.png" alt="Sacola">
+          <span id="badgeSacolaMobile" class="badge-sacola-mobile">0</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Modal de Busca Mobile -->
+  <div id="modalBuscaMobile" class="modal-busca-mobile">
+    <div class="modal-busca-content">
+      <div class="modal-busca-header">
+        <input type="text" id="buscarItemMobile" placeholder="O que você está buscando?">
+        <button class="btn-fechar-busca">✕</button>
+      </div>
+      <div id="resultadosBuscaMobile"></div>
+    </div>
+  </div>
+
+  <main>
+    <section id="carrossel">
+      <div class="carousel-container">
+        <button class="arrow arrow-left" aria-label="Slide anterior">◀</button>
+        <button class="arrow arrow-right" aria-label="Próximo slide">▶</button>
+
+        <div class="carousel-wrapper" id="carouselWrapper">
+          <!-- SLIDE 1 -->
+          <div class="carousel-slide slide-studio">
+            <img class="img-desktop" src="./Assets/Sources/Ofertas - 1.png" alt="Ofertas Desktop">
+            <img class="img-mobile" src="./Assets/Sources/Pose - 1 (1).png" alt="Ofertas Mobile">
+          </div>
+
+          <!-- SLIDE 2 -->
+          <div class="carousel-slide slide-studio">
+            <img class="img-desktop" src="./Assets/Sources/Ofertas - 1 (1).png" alt="Promoções Desktop">
+            <img class="img-mobile" src="./Assets/Sources/Pose - 1 (2).png" alt="Promoções Mobile">
+          </div>
+
+          <!-- SLIDE 3 -->
+          <div class="carousel-slide slide-studio">
+            <img class="img-desktop" src="./Assets/Sources/New - 1.png" alt="Novidades Desktop">
+            <img class="img-mobile" src="./Assets/Sources/Pose - 1.png" alt="Novidades Mobile">
+          </div>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </section>
+
+    <div id="linha_separadora"></div>
+
+    <section id="colecao">
+      <h2>Coleção</h2>
+      <div class="cardsVendidos"></div>
+    </section>
+  </main>
+
+  <div class="menu-panel" id="menuPanel">
+    <div class="menu-header">
+      <img src="./Assets/Sources/Beach.png" alt="Beach Please" class="menu-logo">
+      <button class="close-menu" id="closeMenu"></button>
+    </div>
+
+    <nav class="menu-content">
+      <a href="./index.html" class="menu-item">
+        <span>Home</span>
+        <svg class="setinha produto_seta" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="./Pages/produtos.html" class="menu-item">
+        <span>Produtos</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#horarios" class="menu-item">
+        <span>Horários de Atendimento</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#retiradas" class="menu-item">
+        <span>Retiradas</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#perguntas" class="menu-item">
+        <span>Perguntas Frequentes</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <a href="#contato" class="menu-item">
+        <span>Contato</span>
+        <svg class="setinha" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+          <path d="M7.5 5L12.5 10L7.5 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </nav>
+  </div>
+
+  <div id="footer">
+    <h2>Desenvolvido por Matheus e Lucas.</h2>
+    <h2>Designed by Nayra Conrado.</h2>
+    <p>&copy;Todos os direitos reservados.</p>
+  </div>
+
+<footer id="rodape">
+  <section class="menuzin">
+    <div id="icons">
+      <img src="./Assets/Sources/icons8-home-500.png" alt="Home" class="home-icon">
+      <img src="./Assets/Sources/hamburger.png" alt="Menu" class="menuAbrir">
+      <img src="./Assets/Sources/loupe.png" alt="Buscar" class="lupinha-rodape">
+      <div class="sacola-footer-wrapper">
+        <img src="./Assets/Sources/shopping-bag.png" alt="Sacola" class="sacola-rodape">
+        <span id="badgeSacolaFooter" class="badge-sacola-footer">0</span>
+      </div>
+    </div>
+  </section>
+</footer>
+
+  <script type="module" src="./JS/carrosselScript.js"></script>
+  <script type="module" src="./JS/script.js"></script>
+  <script src="./JS/auth.js"></script>
+</body>
+
+</html>

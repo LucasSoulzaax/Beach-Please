@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beach Please - Painel Admin</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --primary-color: #f7a47a;
+      --secondary-color: #dde3d4;
+      --peach-bg: #f9d1b7;
+      --cream-bg: #fcfcf4;
+      --text-dark: #2c2c2c;
+      --text-light: #666;
+      --orange: #ff914d;
+      --orange-hover: #ff7a2e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream-bg);
+      min-height: 100vh;
+    }
+
+
+    .header {
+      background: linear-gradient(135deg, var(--cream-bg) 0%, #fff 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 15px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .admin-badge {
+      background: var(--orange);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .btn-sair {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .btn-sair:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+    }
+
+
+    .container {
+      display: flex;
+      margin-top: 70px;
+      min-height: calc(100vh - 70px);
+    }
+
+
+    .sidebar {
+      width: 260px;
+      background: white;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+      padding: 20px 0;
+      position: fixed;
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 25px;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.3s;
+      border-left: 4px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: #fff5ee;
+      border-left-color: var(--orange);
+    }
+
+    .nav-item.ativo {
+      background: #fff5ee;
+      border-left-color: var(--orange);
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+    }
+
+
+    .main-content {
+      flex: 1;
+      margin-left: 260px;
+      padding: 30px;
+    }
+
+    .secao {
+      display: none;
+    }
+
+    .secao.ativo {
+      display: block;
+    }
+
+   
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+  
+    .secao-card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .secao-titulo {
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--orange);
+    }
+
+
+    .tabela {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tabela th,
+    .tabela td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .tabela th {
+      background: #f7fafc;
+      color: #4a5568;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .tabela tr:hover {
+      background: #fafafa;
+    }
+
+    .badge {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-pix {
+      background: #48bb78;
+      color: white;
+    }
+
+    .badge-credito {
+      background: #667eea;
+      color: white;
+    }
+
+    .badge-debito {
+      background: #ed8936;
+      color: white;
+    }
+
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .campo label {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+    }
+
+    .campo input,
+    .campo select {
+      padding: 12px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border 0.3s;
+    }
+
+    .campo input:focus,
+    .campo select:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      border: none;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #48bb78;
+      border: none;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .btn-secondary:hover {
+      background: #38a169;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+    }
+
+
+    .grid-produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card-produto {
+      background: #fafafa;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .card-produto:hover {
+      transform: translateY(-5px);
+      border-color: var(--orange);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-produto img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-produto-info {
+      padding: 15px;
+    }
+
+    .card-produto-info h3 {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .card-produto-info .preco {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 5px;
+    }
+
+    .card-produto-info .detalhes {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .filtros {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filtros select {
+      padding: 10px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+
+    .aviso {
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      display: none;
+    }
+
+    .aviso.sucesso {
+      display: block;
+      background: #d4edda;
+      color: #155724;
+      border-left: 4px solid #28a745;
+    }
+
+    .aviso.erro {
+      display: block;
+      background: #f8d7da;
+      color: #721c24;
+      border-left: 4px solid #dc3545;
+    }
+
+
+    .vazio {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--text-light);
+    }
+
+    .vazio-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+
+
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .container {
+        flex-direction: column;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .header {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="../index.html" class="logo"><img src="../Assets/Sources/Beach.png" alt="Beach Please"></a>
+      <span class="admin-badge">👑 ADMIN</span>
+    </div>
+    <button class="btn-sair" onclick="sairDaConta()">🚪 Sair da Conta</button>
+  </header>
+
+  <div class="container">
+    <nav class="sidebar">
+      <div class="nav-item ativo" onclick="navegarPara('dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" onclick="navegarPara('vendas')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+        </svg>
+        <span>Histórico de Vendas</span>
+      </div>
+      <div class="nav-item" onclick="navegarPara('adicionar')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 8v8M8 12h8" />
+        </svg>
+        <span>Adicionar Produto</span>
+      </div>
+      <div class="nav-item" onclick="navegarPara('produtos')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+          <path d="M3 6h18M16 10a4 4 0 01-8 0" />
+        </svg>
+        <span>Gerenciar Produtos</span>
+      </div>
+      <div class="nav-item" onclick="voltarParaLoja()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          <polyline points="9,22 9,12 15,12 15,22" />
+        </svg>
+        <span>Voltar para Loja</span>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <!-- DASHBOARD -->
+      <section class="secao ativo" id="secaoDashboard">
+        <h1 style="margin-bottom: 25px; color: var(--text-dark);">📊 Dashboard</h1>
+        <div class="dashboard-grid" id="dashboardStats"></div>
+        <div class="secao-card">
+          <h2 class="secao-titulo">Últimas Vendas</h2>
+          <div id="ultimasVendas"></div>
+        </div>
+        <button class="btn-secondary" onclick="gerarRelatorio()" style="margin-top: 10px;">📄 Gerar Relatório Completo</button>
+      </section>
+
+      <!-- HISTÓRICO DE VENDAS -->
+      <section class="secao" id="secaoVendas">
+        <h1 style="margin-bottom: 25px; color: var(--text-dark);">💰 Histórico de Vendas</h1>
+        <div class="secao-card">
+          <div id="todasVendas"></div>
+        </div>
+      </section>
+
+      <!-- ADICIONAR PRODUTO -->
+      <section class="secao" id="secaoAdicionar">
+        <h1 style="margin-bottom: 25px; color: var(--text-dark);">➕ Adicionar Produto</h1>
+        <div class="secao-card">
+          <div class="aviso" id="avisoAdicionar"></div>
+          <form class="form-grid" onsubmit="adicionarProduto(event)">
+            <div class="campo">
+              <label>Nome do Produto</label>
+              <input type="text" id="nomeProduto" placeholder="Ex: Vestido Linho Off-White" required>
+            </div>
+            <div class="form-row">
+              <div class="campo">
+                <label>URL da Imagem</label>
+                <input type="url" id="imgProduto" placeholder="https://..." required>
+              </div>
+              <div class="campo">
+                <label>URL Imagem Hover (opcional)</label>
+                <input type="url" id="imgHoverProduto" placeholder="https://...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="campo">
+                <label>Preço</label>
+                <input type="text" id="precoProduto" placeholder="R$ 189,90" required>
+              </div>
+              <div class="campo">
+                <label>Preço Antigo (promoção)</label>
+                <input type="text" id="precoAntigoProduto" placeholder="R$ 249,90">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="campo">
+                <label>Seção</label>
+                <select id="categoriaProduto" required>
+                  <option value="">Escolha...</option>
+                  <option value="maisVendidos">Mais Vendidos</option>
+                  <option value="promocoes">Promoções</option>
+                  <option value="lancamentos">Lançamentos</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label>Tipo</label>
+                <select id="tipoProduto" required>
+                  <option value="">Escolha...</option>
+                  <option value="vestido">Vestido</option>
+                  <option value="calca">Calça</option>
+                  <option value="blusa">Blusa</option>
+                  <option value="lingerie">Lingerie</option>
+                  <option value="biquini">Biquíni</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">Adicionar Produto</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- GERENCIAR PRODUTOS -->
+      <section class="secao" id="secaoProdutos">
+        <h1 style="margin-bottom: 25px; color: var(--text-dark);">📦 Gerenciar Produtos</h1>
+        <div class="secao-card">
+          <div class="filtros">
+            <select id="filtroSecao" onchange="carregarProdutos()">
+              <option value="todos">Todas as seções</option>
+              <option value="maisVendidos">Mais Vendidos</option>
+              <option value="promocoes">Promoções</option>
+              <option value="lancamentos">Lançamentos</option>
+            </select>
+            <select id="filtroTipo" onchange="carregarProdutos()">
+              <option value="todos">Todos os tipos</option>
+              <option value="vestido">Vestido</option>
+              <option value="calca">Calça</option>
+              <option value="blusa">Blusa</option>
+              <option value="lingerie">Lingerie</option>
+              <option value="biquini">Biquíni</option>
+            </select>
+          </div>
+          <div class="grid-produtos" id="gridProdutos"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+ 
+    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+    if (!usuarioLogado || !usuarioLogado.isAdmin) {
+      alert('Acesso negado! Apenas administradores podem acessar esta página.');
+      window.location.href = '../index.html';
+    }
+
+
+    function voltarParaLoja() {
+      const referrer = document.referrer;
+      
+      if (referrer.includes('produtos.html')) {
+        window.location.href = 'produtos.html';
+      } else {
+    
+        window.location.href = '../index.html';
+      }
+    }
+
+
+    function navegarPara(secao) {
+      document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativo'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('ativo'));
+      document.getElementById('secao' + secao.charAt(0).toUpperCase() + secao.slice(1)).classList.add('ativo');
+      event.currentTarget.classList.add('ativo');
+
+      if (secao === 'dashboard') { renderizarDashboard(); renderizarUltimasVendas(); }
+      if (secao === 'vendas') renderizarTodasVendas();
+      if (secao === 'produtos') carregarProdutos();
+    }
+
+
+    function calcularEstatisticas() {
+      const vendas = JSON.parse(localStorage.getItem('vendas') || '[]');
+      let totalVendas = 0, totalPix = 0, totalCredito = 0, totalDebito = 0;
+
+      vendas.forEach(venda => {
+        const valor = typeof venda.total === 'number' ? venda.total : parseFloat(venda.total) || 0;
+        totalVendas += valor;
+
+        if (venda.metodoPagamento.toLowerCase().includes('pix')) {
+          totalPix += valor;
+        } else if (venda.metodoPagamento.toLowerCase().includes('crédito') || venda.metodoPagamento.toLowerCase().includes('credito')) {
+          totalCredito += valor;
+        } else if (venda.metodoPagamento.toLowerCase().includes('débito') || venda.metodoPagamento.toLowerCase().includes('debito')) {
+          totalDebito += valor;
+        }
+      });
+
+      return { totalVendas, totalPix, totalCredito, totalDebito, quantidadeVendas: vendas.length };
+    }
+
+
+    function renderizarDashboard() {
+      const stats = calcularEstatisticas();
+      document.getElementById('dashboardStats').innerHTML = `
+        <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Faturamento Total</div><div class="stat-value">R$ ${stats.totalVendas.toFixed(2).replace('.', ',')}</div></div>
+        <div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Total de Vendas</div><div class="stat-value">${stats.quantidadeVendas}</div></div>
+        <div class="stat-card"><div class="stat-icon">📱</div><div class="stat-label">Vendas PIX</div><div class="stat-value">R$ ${stats.totalPix.toFixed(2).replace('.', ',')}</div></div>
+        <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Vendas Crédito</div><div class="stat-value">R$ ${stats.totalCredito.toFixed(2).replace('.', ',')}</div></div>
+        <div class="stat-card"><div class="stat-icon">💵</div><div class="stat-label">Vendas Débito</div><div class="stat-value">R$ ${stats.totalDebito.toFixed(2).replace('.', ',')}</div></div>
+      `;
+    }
+
+
+    function renderizarVendasTabela(vendas, containerId, limite = null) {
+      const container = document.getElementById(containerId);
+      if (vendas.length === 0) {
+        container.innerHTML = '<div class="vazio"><div class="vazio-icon">📦</div><h3>Nenhuma venda registrada</h3></div>';
+        return;
+      }
+      vendas.sort((a, b) => new Date(b.data) - new Date(a.data));
+      const vendasExibir = limite ? vendas.slice(0, limite) : vendas;
+
+      let html = '<table class="tabela"><thead><tr><th>Data</th><th>Método</th><th>Itens</th><th>Total</th></tr></thead><tbody>';
+      vendasExibir.forEach(venda => {
+        const data = new Date(venda.data);
+        const dataFormatada = data.toLocaleDateString('pt-BR') + ' ' + data.toLocaleTimeString('pt-BR');
+
+        let badgeClass = 'badge-pix';
+        if (venda.metodoPagamento.toLowerCase().includes('crédito') || venda.metodoPagamento.toLowerCase().includes('credito')) {
+          badgeClass = 'badge-credito';
+        } else if (venda.metodoPagamento.toLowerCase().includes('débito') || venda.metodoPagamento.toLowerCase().includes('debito')) {
+          badgeClass = 'badge-debito';
+        }
+
+        const itens = venda.itens ? venda.itens.map(i => `${i.titulo} (${i.quantidade}x)`).join(', ') : '-';
+        const total = typeof venda.total === 'number' ? venda.total : parseFloat(venda.total) || 0;
+        html += `<tr><td>${dataFormatada}</td><td><span class="badge ${badgeClass}">${venda.metodoPagamento}</span></td><td>${itens}</td><td><strong>R$ ${total.toFixed(2).replace('.', ',')}</strong></td></tr>`;
+      });
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function renderizarUltimasVendas() {
+      const vendas = JSON.parse(localStorage.getItem('vendas') || '[]');
+      renderizarVendasTabela(vendas, 'ultimasVendas', 5);
+    }
+
+    function renderizarTodasVendas() {
+      const vendas = JSON.parse(localStorage.getItem('vendas') || '[]');
+      renderizarVendasTabela(vendas, 'todasVendas');
+    }
+
+ 
+    function adicionarProduto(e) {
+      e.preventDefault();
+      const produto = {
+        id: Date.now(),
+        titulo: document.getElementById('nomeProduto').value,
+        img: document.getElementById('imgProduto').value,
+        imgHover: document.getElementById('imgHoverProduto').value || '',
+        preco: document.getElementById('precoProduto').value,
+        precoAntigo: document.getElementById('precoAntigoProduto').value || '',
+        categoria: document.getElementById('categoriaProduto').value,
+        tipo: document.getElementById('tipoProduto').value
+      };
+      const produtos = JSON.parse(localStorage.getItem('produtosAdmin') || '[]');
+      produtos.push(produto);
+      localStorage.setItem('produtosAdmin', JSON.stringify(produtos));
+
+      const aviso = document.getElementById('avisoAdicionar');
+      aviso.textContent = 'Produto adicionado com sucesso!';
+      aviso.className = 'aviso sucesso';
+      setTimeout(() => aviso.className = 'aviso', 3000);
+      e.target.reset();
+    }
+
+
+    function carregarProdutos() {
+      const produtos = JSON.parse(localStorage.getItem('produtosAdmin') || '[]');
+      const secao = document.getElementById('filtroSecao').value;
+      const tipo = document.getElementById('filtroTipo').value;
+
+      let filtrados = produtos;
+      if (secao !== 'todos') filtrados = filtrados.filter(p => p.categoria === secao);
+      if (tipo !== 'todos') filtrados = filtrados.filter(p => p.tipo === tipo);
+
+      const grid = document.getElementById('gridProdutos');
+      if (filtrados.length === 0) {
+        grid.innerHTML = '<div class="vazio"><div class="vazio-icon">📦</div><h3>Nenhum produto encontrado</h3></div>';
+        return;
+      }
+
+      const nomes = { maisVendidos: 'Mais Vendidos', promocoes: 'Promoções', lancamentos: 'Lançamentos', vestido: 'Vestido', calca: 'Calça', blusa: 'Blusa', lingerie: 'Lingerie', biquini: 'Biquíni' };
+      grid.innerHTML = filtrados.map(p => `
+        <div class="card-produto">
+          <img src="${p.img}" alt="${p.titulo}" onerror="this.src='https://via.placeholder.com/300x200?text=Sem+Imagem'">
+          <div class="card-produto-info">
+            <h3>${p.titulo}</h3>
+            <div class="preco">${p.preco}</div>
+            ${p.precoAntigo ? `<div style="text-decoration: line-through; color: #999; font-size: 0.85rem;">${p.precoAntigo}</div>` : ''}
+            <div class="detalhes">Seção: ${nomes[p.categoria] || p.categoria} | Tipo: ${nomes[p.tipo] || p.tipo}</div>
+            <button class="btn-danger" onclick="removerProduto(${p.id})">Remover</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removerProduto(id) {
+      if (!confirm('Remover este produto?')) return;
+      let produtos = JSON.parse(localStorage.getItem('produtosAdmin') || '[]');
+      produtos = produtos.filter(p => p.id !== id);
+      localStorage.setItem('produtosAdmin', JSON.stringify(produtos));
+      carregarProdutos();
+    }
+
+
+    function gerarRelatorio() {
+      const vendas = JSON.parse(localStorage.getItem('vendas') || '[]');
+      if (vendas.length === 0) { alert('Não há vendas para gerar relatório!'); return; }
+
+      const stats = calcularEstatisticas();
+      const hoje = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-');
+
+      let relatorio = '=== RELATÓRIO DE VENDAS - BEACH PLEASE ===\n\n';
+      relatorio += `Data de Geração: ${new Date().toLocaleDateString('pt-BR')} ${new Date().toLocaleTimeString('pt-BR')}\n\n`;
+      relatorio += '--- RESUMO GERAL ---\n';
+      relatorio += `Total de Vendas: ${stats.quantidadeVendas}\n`;
+      relatorio += `Faturamento Total: R$ ${stats.totalVendas.toFixed(2).replace('.', ',')}\n`;
+      relatorio += `Ticket Médio: R$ ${(stats.totalVendas / stats.quantidadeVendas).toFixed(2).replace('.', ',')}\n\n`;
+      relatorio += '--- VENDAS POR MÉTODO ---\n';
+      relatorio += `PIX: R$ ${stats.totalPix.toFixed(2).replace('.', ',')} (${stats.totalVendas > 0 ? ((stats.totalPix / stats.totalVendas) * 100).toFixed(1) : 0}%)\n`;
+      relatorio += `Crédito: R$ ${stats.totalCredito.toFixed(2).replace('.', ',')} (${stats.totalVendas > 0 ? ((stats.totalCredito / stats.totalVendas) * 100).toFixed(1) : 0}%)\n`;
+      relatorio += `Débito: R$ ${stats.totalDebito.toFixed(2).replace('.', ',')} (${stats.totalVendas > 0 ? ((stats.totalDebito / stats.totalVendas) * 100).toFixed(1) : 0}%)\n\n`;
+      relatorio += '--- DETALHAMENTO ---\n\n';
+
+      vendas.sort((a, b) => new Date(b.data) - new Date(a.data));
+      vendas.forEach((venda, i) => {
+        const data = new Date(venda.data);
+        const total = typeof venda.total === 'number' ? venda.total : parseFloat(venda.total) || 0;
+        relatorio += `Venda #${i + 1}\nData: ${data.toLocaleDateString('pt-BR')} ${data.toLocaleTimeString('pt-BR')}\nMétodo: ${venda.metodoPagamento}\nTotal: R$ ${total.toFixed(2).replace('.', ',')}\nItens:\n`;
+        if (venda.itens) venda.itens.forEach(item => { relatorio += `  - ${item.titulo} | Qtd: ${item.quantidade} | Preço: ${item.preco}\n`; });
+        relatorio += '\n';
+      });
+
+      relatorio += '=======================================\n© Beach Please - Todos os direitos reservados\n';
+
+      const blob = new Blob([relatorio], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `relatorio-vendas-${hoje}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      alert('Relatório gerado com sucesso!');
+    }
+
+
+    function sairDaConta() {
+      if (confirm('Deseja realmente sair da conta de administrador?')) {
+        localStorage.removeItem('usuarioLogado');
+        window.location.href = '../index.html';
+      }
+    }
+
+  
+    renderizarDashboard();
+    renderizarUltimasVendas();
+  </script>
+</body>
+
+</html>
